@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -23,8 +27,14 @@ public class Main {
        counter.add(line);
      }
 
-     // TODO DO something with the WordCounter.
-     System.out.println(counter);
+     counter
+         .getCounts()
+         .entrySet()
+         .stream()
+         .sorted(Comparator.comparing(Entry<String, Integer>::getValue).reversed())
+         .limit(10)
+         .forEach(System.out::println);
+
    }
   }
 
